@@ -2,21 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Feeling extends Component {
-
-    state = {
-        feeling: ''
-    }
     
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.dispatch( {type: 'FEELING_SCORE', payload: this.state.feeling} );
+        this.props.history.push('/comprehension');
     }
 
     handleChange = (event) => {
         event.preventDefault();
-        this.setState({
-            feeling: event.target.value
-        })
+        this.props.dispatch( {type: 'FEELING_SCORE', payload: event.target.value} );
     }
 
 
