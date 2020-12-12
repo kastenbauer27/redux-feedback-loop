@@ -8,7 +8,11 @@ import { Provider } from 'react-redux';
 import { logger } from 'redux-logger';
 
 const feelingReducer = (state=0, action) => {
-    return state
+    if (action.type === 'FEELING_SCORE'){
+        return action.payload
+    } else {
+        return state
+    }  
 }
 
 const comprehensionReducer = (state=0, action) => {

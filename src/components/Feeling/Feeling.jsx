@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Feeling extends Component {
+
+    state = {
+        feeling: ''
+    }
     
-    onSubmit = (event) => {
+    handleSubmit = (event) => {
         event.preventDefault();
-        let feelingSelected = event.target.value;
-        console.log(feelingSelected);
+        this.props.dispatch( {type: 'FEELING_SCORE', payload: this.state.feeling} );
     }
 
+    handleChange = (event) => {
+        event.preventDefault();
+        this.setState({
+            feeling: event.target.value
+        })
+    }
+
+
     render() { 
+        console.log(this.state);
         return (
             <div>
                 <div> 
                     <h1>How are you feeling today?</h1>
                 </div>
-                <form>
-                    <select onSubmit={(event) => this.handleSubmit(event)}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+                <form onSubmit={(event) => this.handleSubmit(event)}>
+                    <input type="number" id="feelingInput" min="0" max="5" onChange={(event) => this.handleChange(event)}/>
                     <button type="submit">Next</button>
                 </form>
             </div>
@@ -29,4 +36,4 @@ class Feeling extends Component {
     }
 }
  
-export default Feeling;
+export default connect()(Feeling);
