@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class ReviewPage extends Component {
-    state = {  }
+
+    handleSubmit = (event) => {
+        axios.post('')
+    }
+    
     render() { 
         return (
+        <div>
             <table>
                 <thead>
                     <tr>
@@ -23,6 +29,9 @@ class ReviewPage extends Component {
                     </tr>
                 </tbody>
             </table>
+            <button onClick={this.handleSubmit}>Submit Review</button>
+        </div>
+            
             
          );
     }
