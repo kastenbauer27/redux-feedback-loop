@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import './ReviewPage.css';
 
 class ReviewPage extends Component {
 
@@ -29,7 +30,7 @@ class ReviewPage extends Component {
     render() { 
         return (
         <div>
-            <table>
+            <table className="review-table">
                 <thead>
                     <tr>
                         <th>Feeling</th>
