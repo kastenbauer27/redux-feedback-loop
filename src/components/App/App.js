@@ -32,6 +32,16 @@ class App extends Component {
     })
   }
 
+  postNewFeedback = (event, feedbackObject) => {
+    event.preventDefault();
+    axios.post('/feedback', feedbackObject).then(response => {
+        console.log(response);
+    }).catch(err => {
+        console.log('Error in POST for feedback', err);
+        alert('Unable to add feedback at this time.');
+    })
+}
+
   render() {
     return (
       <div className="App">
@@ -43,7 +53,7 @@ class App extends Component {
           <Route path="/comprehension" component={Comprehension}></Route>
           <Route path="/support" component={Support}></Route>
           <Route path="/comments" component={Comments}></Route>
-          <Route path="/review" component={ReviewPage}></Route>
+          <Route path="/review" component={ () => <ReviewPage postNewFeedback={this.postNewFeedback} />}></Route>
           <Route path="/admin" component={ () => <AdminPage getFeedbackData={this.getFeedbackData} feedbackData={this.state.feedbackData}/> }></Route>
         </Router>
       </div>

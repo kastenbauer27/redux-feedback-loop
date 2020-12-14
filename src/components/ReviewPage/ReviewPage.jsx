@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 class ReviewPage extends Component {
 
-    handleSubmit = (event) => {
-        axios.post('')
+    state = {
+        feedbackObject: { 
+            feeling: Number(this.props.reduxState.feelingReducer),
+            understanding: Number(this.props.reduxState.comprehensionReducer),
+            support: Number(this.props.reduxState.supportReducer),
+            comments: this.props.reduxState.commentsReducer           
+         }
     }
     
     render() { 
@@ -29,7 +33,7 @@ class ReviewPage extends Component {
                     </tr>
                 </tbody>
             </table>
-            <button onClick={this.handleSubmit}>Submit Review</button>
+            <button onClick={(event) => this.props.postNewFeedback(event, this.state.feedbackObject)}>Submit Review</button>
         </div>
             
             
