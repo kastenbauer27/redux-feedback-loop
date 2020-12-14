@@ -9,30 +9,38 @@ import { logger } from 'redux-logger';
 
 const feelingReducer = (state=0, action) => {
     if (action.type === 'FEELING_SCORE'){
-        return action.payload
+        return action.payload;
+    } else if (action.type === 'RESET'){
+        return 0;
     } 
-    return state
+    return state;
 }
 
 const comprehensionReducer = (state=0, action) => {
     if (action.type === 'COMPREHENSION_SCORE'){
-        return action.payload
+        return action.payload;
+    } else if (action.type === 'RESET'){
+        return 0;
     }
-    return state
+    return state;
 }
 
 const supportReducer = (state=0, action) => {
     if (action.type === 'SUPPORT_SCORE'){
-        return action.payload
+        return action.payload;
+    } else if (action.type === 'RESET'){
+        return 0;
     }
-    return state
+    return state;
 }
 
 const commentsReducer = (state='', action) => {
     if (action.type === 'COMMENTS'){
-        return action.payload
+        return action.payload;
+    } else if (action.type === 'RESET'){
+        return '';
     }
-    return state
+    return state;
 }
 
 const reduxStore = createStore(

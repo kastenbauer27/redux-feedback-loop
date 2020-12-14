@@ -2,20 +2,32 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Feeling extends Component {
+
+    state = {
+        value: ''
+    }
     
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.history.push('/comprehension');
+        if (this.state.value === ''){
+            alert('Please select or enter a value to proceed.');
+        } else {
+            this.props.dispatch( {type: 'FEELING_SCORE', payload: this.state.value} );
+            this.props.history.push('/comprehension');
+        } 
+        
     }
 
     handleChange = (event) => {
         event.preventDefault();
-        this.props.dispatch( {type: 'FEELING_SCORE', payload: event.target.value} );
+        this.setState({
+              value: event.target.value
+            })  
     }
 
 
     render() { 
-        console.log(this.state);
+        //console.log(this.state);
         return (
             <div>
                 <div> 
