@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 class ReviewPage extends Component {
 
@@ -10,6 +12,18 @@ class ReviewPage extends Component {
             support: Number(this.props.reduxState.supportReducer),
             comments: this.props.reduxState.commentsReducer           
          }
+    }
+
+    postNewFeedback = (event, feedbackObject) => {
+        event.preventDefault();
+        axios.post('/feedback', feedbackObject).then(response => {
+            console.log(response);
+            this.props.getFeedbackData();
+            this.props.history.push('/thankyou');
+        }).catch(err => {
+            console.log('Error in POST for feedback', err);
+            alert('Unable to add feedback at this time.');
+        })
     }
     
     render() { 
@@ -33,7 +47,7 @@ class ReviewPage extends Component {
                     </tr>
                 </tbody>
             </table>
-            <button onClick={(event) => this.props.postNewFeedback(event, this.state.feedbackObject)}>Submit Review</button>
+            <button onClick={(event) => this.postNewFeedback(event, this.state.feedbackObject)}>Submit Review</button>
         </div>
             
             
@@ -45,4 +59,4 @@ const mapStateToProps = (reduxState) => ({
     reduxState
 })
  
-export default connect(mapStateToProps)(ReviewPage);
+export default withRouter(connect(mapStateToProps)(ReviewPage));
